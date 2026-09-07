@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="AwzaERwgzc1wfrGsXI8PKS">
+<head data-page-node-id="Dx6rjDvLDMae3tVzReCPpg">
+<meta charset="UTF-8" data-page-node-id="dt9kbkHJ8N6qEdbAiV65oU">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="MTyjyELwRH1CFkAexCSiV4">
+<title>意大利之行穿搭清单 · 可视化版</title>
+<style>
+:root{
+  --bg:#F5F7FB;
+  --card:#FFFFFF;
+  --ink:#1F2937;
+  --ink-strong:#0F172A;
+  --muted:#6B7280;
+  --line:#E5E7EB;
+  --brand:#2563EB;
+  --brand-deep:#1D4ED8;
+
+  /* 温度等级色 */
+  --hot:#EA580C;  --hot-bg:#FFF7ED;  --hot-bd:#FDBA74;
+  --warm:#D97706; --warm-bg:#FFFBEB; --warm-bd:#FCD34D;
+  --mild:#059669; --mild-bg:#ECFDF5; --mild-bd:#6EE7B7;
+  --cool:#2563EB; --cool-bg:#EFF6FF; --cool-bd:#93C5FD;
+  --cold:#1E40AF; --cold-bg:#DBEAFE; --cold-bd:#60A5FA;
+  --freeze:#1E3A8A; --freeze-bg:#DBEAFE; --freeze-bd:#3B82F6;
+
+  --shadow:0 1px 2px rgba(16,24,40,.05), 0 6px 20px rgba(16,24,40,.06);
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","苹方-简","Microsoft YaHei",sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.6;
+  padding:0 0 64px;
+}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+
+/* ===== Hero ===== */
+.hero{
+  background:linear-gradient(135deg,#1E3A8A 0%,#2563EB 34%,#0EA5E9 60%,#22C55E 84%,#F59E0B 100%);
+  color:#fff;
+  padding:44px 0 34px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;right:-80px;top:-80px;width:320px;height:320px;
+  background:radial-gradient(circle,rgba(255,255,255,.18),transparent 70%);
+}
+.hero .wrap{position:relative;z-index:1}
+.hero-kicker{
+  display:inline-block;font-size:12px;letter-spacing:2px;font-weight:600;
+  padding:4px 12px;border:1px solid rgba(255,255,255,.45);border-radius:999px;
+  margin-bottom:16px;opacity:.95;
+}
+.hero h1{font-size:34px;font-weight:800;letter-spacing:.5px;line-height:1.25}
+.hero .sub{font-size:15px;opacity:.92;margin-top:10px}
+.route{
+  margin-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;
+}
+.route .dot{
+  background:rgba(255,255,255,.95);color:#1E3A8A;padding:5px 12px;border-radius:999px;
+}
+.route .sep{opacity:.6;font-weight:400}
+.hero-stats{
+  margin-top:26px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+}
+.hstat{
+  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);
+  border-radius:12px;padding:14px 16px;backdrop-filter:blur(2px);
+}
+.hstat .n{font-size:26px;font-weight:800;line-height:1}
+.hstat .l{font-size:12px;opacity:.9;margin-top:6px}
+
+/* ===== 通用卡片 ===== */
+section{margin-top:30px}
+.sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px}
+.sec-head h2{font-size:21px;font-weight:800;color:var(--ink-strong)}
+.sec-head .tag{font-size:12px;color:var(--muted);font-weight:500}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px}
+
+/* ===== 温度图 ===== */
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:6px 0 20px;font-size:12px;color:var(--muted)}
+.legend .item{display:flex;align-items:center;gap:6px}
+.legend .sw{width:14px;height:14px;border-radius:4px}
+.temp-chart{overflow-x:auto}
+.temp-row{display:flex;align-items:center;height:40px;margin:2px 0}
+.temp-date{width:78px;flex:none;font-size:13px;font-weight:700;color:var(--ink-strong);line-height:1.25}
+.temp-date .wd{font-weight:500;color:var(--muted);font-size:11px}
+.temp-track{flex:1;min-width:320px;position:relative;height:26px;margin:0 12px;border-radius:8px;
+  background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);
+  background-size:14.2857% 100%;background-position:0 0;
+}
+.temp-band{position:absolute;top:0;bottom:0;border-radius:6px}
+.band-comfort{left:42.86%;width:28.57%;background:rgba(16,185,129,.10)}
+.band-cold{left:0;width:28.57%;background:rgba(37,99,235,.08)}
+.temp-bar{
+  position:absolute;top:4px;bottom:4px;border-radius:5px;min-width:6px;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);
+  transition:transform .12s ease,box-shadow .12s ease;
+}
+.temp-bar:hover{transform:scaleY(1.12);box-shadow:0 2px 8px rgba(0,0,0,.25);cursor:default}
+.temp-val{width:96px;flex:none;font-size:12px;font-weight:600;color:var(--ink);text-align:right;line-height:1.25}
+.temp-val .feel{display:block;font-weight:500;color:var(--muted);font-size:11px}
+.temp-axis{display:flex;align-items:center;margin-top:8px}
+.temp-axis .temp-date{visibility:hidden}
+.temp-axis .temp-track{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);height:auto;margin:0 12px;background:none}
+.temp-axis .temp-val{visibility:hidden}
+.badge{
+  display:inline-block;font-size:10px;font-weight:700;padding:1px 6px;border-radius:5px;
+  background:var(--freeze);color:#fff;margin-left:2px;vertical-align:1px;
+}
+
+/* ===== 逐日卡片 ===== */
+.days{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.day{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;
+}
+.day-top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--line)}
+.day-date{font-size:15px;font-weight:800;color:var(--ink-strong)}
+.day-date .wd{font-weight:500;color:var(--muted);font-size:12px}
+.day-temp{font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px;white-space:nowrap}
+.day-body{padding:14px 16px;display:flex;flex-direction:column;gap:10px;flex:1}
+.day-row{display:flex;gap:8px;font-size:13px}
+.day-row .k{flex:none;width:34px;color:var(--muted);font-weight:600;padding-top:1px}
+.day-row .v{color:var(--ink);flex:1}
+.day-row .v strong{color:var(--ink-strong)}
+.day-strip{height:6px}
+.day.t-hot .day-strip{background:var(--hot)}
+.day.t-warm .day-strip{background:var(--warm)}
+.day.t-mild .day-strip{background:var(--mild)}
+.day.t-cool .day-strip{background:var(--cool)}
+.day.t-cold .day-strip{background:var(--cold)}
+.day.t-freeze .day-strip{background:var(--freeze)}
+.day.t-freeze{border-color:var(--freeze-bd);box-shadow:0 0 0 3px var(--freeze-bg),var(--shadow)}
+
+/* ===== 打包清单 ===== */
+.pack{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.pack-item{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow);padding:16px;border-top:4px solid var(--muted);
+}
+.pack-item .cat{font-size:14px;font-weight:800;color:var(--ink-strong);display:flex;align-items:center;gap:8px}
+.pack-item .cat .dot{width:10px;height:10px;border-radius:3px;flex:none}
+.pack-item .what{font-size:13px;color:var(--ink);margin-top:8px;line-height:1.55}
+.pack-item .where{font-size:11px;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+.pack-item.key{border-top-color:var(--brand);background:linear-gradient(180deg,var(--cool-bg),#fff 60%)}
+.pack-item.key .tag{
+  display:inline-block;font-size:10px;font-weight:700;color:#fff;background:var(--brand);
+  padding:1px 7px;border-radius:5px;margin-left:6px;vertical-align:1px;
+}
+
+/* ===== 策略 & 总结 ===== */
+.strategy{
+  background:linear-gradient(120deg,#EFF6FF,#FFFFFF 55%);
+  border:1px solid var(--cool-bd);border-left:5px solid var(--brand);
+}
+.strategy p{font-size:15px;line-height:1.75}
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.layer{
+  background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+}
+.layer .n{font-size:12px;font-weight:700;color:var(--brand);margin-bottom:4px}
+.layer .t{font-size:13px;color:var(--ink);line-height:1.5}
+.summary{
+  background:linear-gradient(120deg,#DBEAFE,#EFF6FF);
+  border:1px solid var(--freeze-bd);border-left:5px solid var(--freeze);
+}
+.summary p{font-size:15px;line-height:1.75;color:#1E293B}
+.summary .hl{background:var(--freeze);color:#fff;padding:1px 6px;border-radius:4px;font-weight:700}
+.foot{margin-top:28px;text-align:center;font-size:12px;color:var(--muted)}
+
+@media(max-width:760px){
+  .hero h1{font-size:26px}
+  .hero-stats{grid-template-columns:repeat(2,1fr)}
+  .days{grid-template-columns:1fr}
+  .pack{grid-template-columns:1fr 1fr}
+  .layers{grid-template-columns:1fr}
+  .temp-date{width:64px}
+  .temp-val{width:82px}
+}
+</style>
+</head>
+<body data-page-node-id="ijaCE0NmtYzMsvDc1FvY5D">
+
+<!-- ============ HERO ============ -->
+<div class="hero" data-page-node-id="C6bVlBP8acTlpnp0JFh9iG">
+  <div class="wrap" data-page-node-id="8RW4sVB2aIJFkZsrsCh3od">
+    <h1 data-page-node-id="xiZe361k4apmO2XDRT326U">意大利之行穿搭清单</h1>
+
+    <div class="hero-stats" data-page-node-id="DQvPXSbtNAQQC9aL92CL5D">
+      <div class="hstat" data-page-node-id="k8nGoL2605Wl4BAniKxNV3"><div class="n" data-page-node-id="TJVwgVvrqyDG2eiW06B1HI">11</div><div class="l" data-page-node-id="fu49aAKQ0jYG45NjFSO3CZ">天行程</div></div>
+      <div class="hstat" data-page-node-id="MLgxiuiFnwVP4PIuqUZ2gC"><div class="n" data-page-node-id="j7t49vKE0fUKwIkcd0mABV">0–33°C</div><div class="l" data-page-node-id="XS2ORONh23EPLiBlbeJ7cW">全程温度跨度</div></div>
+      <div class="hstat" data-page-node-id="vGiqLkf5LEZtGCIdatDTAY"><div class="n" data-page-node-id="yolpLtEXmOJwqy1Kfj7zPh">8</div><div class="l" data-page-node-id="vz7aj3qfGDXN2rMyCr0dyc">城市 / 地标</div></div>
+      <div class="hstat" data-page-node-id="PFuwPkgDXSpGpE5sKS6yux"><div class="n" data-page-node-id="vJuUHyErDxfxpulZ4jCTU1">3</div><div class="l" data-page-node-id="jgYfnziyCHTj271h2OMRWF">位同行旅伴</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" data-page-node-id="NNhwEOdBGVzRhXcGn04Y9x">
+
+  <!-- ============ 温度全景图 ============ -->
+  <section data-page-node-id="tQdlQMlbzXDQPdebYX6zea">
+    <div class="sec-head" data-page-node-id="TlpbYKmRRY66KVqXZzztU9">
+      <h2 data-page-node-id="Fyr6hOabyBuCvRkMVD3aB4">温度全景图</h2>
+      <span class="tag" data-page-node-id="scilSU33RmIQ8hBw6UzQe5">每日温度区间（最低 → 最高）· 按最低温判定穿衣难度</span>
+    </div>
+
+    <div class="card" data-page-node-id="QvTrrWgSdAgbH0ntsLLRZb">
+      <div class="legend" data-page-node-id="96HCTMLpgVNX7Y44h40E8F">
+        <span class="item" data-page-node-id="bFMy5Xe9ITmmC4a6WhfWa8"><span class="sw" style="background:#EA580C" data-page-node-id="hL20fOIAuSdOjcGgBF3xdc"></span>炎热 ≥25°C</span>
+        <span class="item" data-page-node-id="UiZK0MMMq4FYwtrqhaJ808"><span class="sw" style="background:#D97706" data-page-node-id="CPl5rxa3lUh083QscXb03G"></span>偏暖 15–24°C</span>
+        <span class="item" data-page-node-id="Xs54Z8lwX24FPxUUSQynww"><span class="sw" style="background:#059669" data-page-node-id="YeqSGsrIhozCGofn7HcCmM"></span>舒适 10–14°C</span>
+        <span class="item" data-page-node-id="JzLLSrOhWFypURE1Y26raF"><span class="sw" style="background:#2563EB" data-page-node-id="bFGLDD3YP925UnHNIzlJiM"></span>凉 5–9°C</span>
+        <span class="item" data-page-node-id="bLk3xBMKy1Ptu3guAZWvJc"><span class="sw" style="background:#1E40AF" data-page-node-id="42BIdT6pAfW1fSEldw6BDO"></span>冷 3–5°C</span>
+        <span class="item" data-page-node-id="4PBHjLojgEyEzHwBPTun3p"><span class="sw" style="background:#1E3A8A" data-page-node-id="9GQuJHx5tAuODOBwabMMsN"></span>极冷 ≤2°C</span>
+        <span class="item" style="color:#059669" data-page-node-id="CvVwRLj6j7jLv0hzIqroAV">□ 舒适带 15–25°C</span>
+        <span class="item" style="color:#2563EB" data-page-node-id="VeHZZXdG6llux3QHr1lVT2">□ 需保暖 &lt;10°C</span>
+      </div>
+
+      <div class="temp-chart" data-page-node-id="fYG81dLAbQb8imkNEMXRMm">
+        <!-- 9/25 -->
+        <div class="temp-row" data-page-node-id="M0YuEV49UfValCEziFOwnD">
+          <div class="temp-date" data-page-node-id="2VfA6dYVKfuDPdItdhtaE1">9/25<span class="wd" data-page-node-id="WvlERKjF9x41zHREAKTepG">周五</span></div>
+          <div class="temp-track" data-page-node-id="AiUX8TBMBvF9MSzJx15BDF">
+            <div class="temp-band band-comfort" data-page-node-id="nhrONbavhTbiDPoaD1Da7C"></div>
+            <div class="temp-band band-cold" data-page-node-id="QwcYJMfqzo9k3cgUF4CvDM"></div>
+            <div class="temp-bar" style="left:85.71%;width:8.57%;background:linear-gradient(90deg,#F97316,#EA580C)" title="深圳→香港→曼谷：30–33°C 湿热" data-page-node-id="7AjynLahyH7qjQ726ARA8E"></div>
+          </div>
+          <div class="temp-val" data-page-node-id="R33ttJgJ1uEVOqEjHDUy88">30–33°C<span class="feel" data-page-node-id="4nQTvknN4VhCdecykIKeyC">湿热</span></div>
+        </div>
+        <!-- 9/26 -->
+        <div class="temp-row" data-page-node-id="iHRUnfGSxX3zSSV0JQEPGp">
+          <div class="temp-date" data-page-node-id="gmR5lUZ9oUixF7EupUSgNV">9/26<span class="wd" data-page-node-id="TCDfVXWCvVjBXaMpyRew2p">周六</span></div>
+          <div class="temp-track" data-page-node-id="Vle9Lv2rkqMUx19qddBUgN">
+            <div class="temp-band band-comfort" data-page-node-id="i2oMVj3eOonQoBFgQihnaM"></div><div class="temp-band band-cold" data-page-node-id="puQcLbWVgiMWpDGaEOsQB2"></div>
+            <div class="temp-bar" style="left:14.29%;width:42.86%;background:linear-gradient(90deg,#3B82F6,#2563EB)" title="慕尼黑啤酒节：白天15–20°C，夜5–9°C" data-page-node-id="kGUmBRXFI5NWFcMjTpX6IC"></div>
+          </div>
+          <div class="temp-val" data-page-node-id="b2k8YyoymC0IaAPDI0o7rW">5–20°C<span class="feel" data-page-node-id="tyqQ7e6lTIPCjBONc2CvBU">夜骤冷</span></div>
+        </div>
+        <!-- 9/27 -->
+        <div class="temp-row" data-page-node-id="1Ha5CrYT1IK3yfteFUlKDn">
+          <div class="temp-date" data-page-node-id="ZsJTYMxaKEIyUxvpeA66EG">9/27<span class="wd" data-page-node-id="JifgPv6GOZYALpmFdFJMT7">周日</span></div>
+          <div class="temp-track" data-page-node-id="nJGn8KZXOgyStErgZGFW5d">
+            <div class="temp-band band-comfort" data-page-node-id="BKs1ro41JaThT3GwZduHyB"></div><div class="temp-band band-cold" data-page-node-id="XLLIdOAqJ4OOId5hpiOFTy"></div>
+            <div class="temp-bar" style="left:11.43%;width:40%;background:linear-gradient(90deg,#1E40AF,#2563EB)" title="进入多洛米蒂山谷：白天14–18°C，早晚4–8°C" data-page-node-id="bEcd4d6mCq8l91h6xHWjEI"></div>
+          </div>
+          <div class="temp-val" data-page-node-id="XkSQ00OYGAIeqIE34oCRH1">4–18°C<span class="feel" data-page-node-id="5Sgio0lSzM7id7fm0qNt7f">早晚凉</span></div>
+        </div>
+        <!-- 9/28 最冷 -->
+        <div class="temp-row" data-page-node-id="94gDleJpoMvhxfMjkIf0uj">
+          <div class="temp-date" data-page-node-id="Vscpzjzo7zkCilYEuLrvHs">9/28<span class="wd" data-page-node-id="t927BHrB9TaNlqk5XJzLYN">周一</span><span class="badge" data-page-node-id="zmf8YEI97Si1mY4d9u8K0c">最冷</span></div>
+          <div class="temp-track" data-page-node-id="bPpvKTcZgxzcD7bAWBAKm2">
+            <div class="temp-band band-comfort" data-page-node-id="NODcHdbnIQez5D4uQHCGGL"></div><div class="temp-band band-cold" data-page-node-id="OcICUJIoV8Hb0p8UEtdNOC"></div>
+            <div class="temp-bar" style="left:0;width:34.29%;background:linear-gradient(90deg,#1E3A8A,#2563EB)" title="刀锋山+休斯高原（2000–2500m）：白天5–12°C，早晚0–5°C，风大体感更低" data-page-node-id="NkxIM6gM4rZXpAJqV7uKHm"></div>
+          </div>
+          <div class="temp-val" data-page-node-id="BGKCTdBuJ1yVGIt2bqYDkx">0–12°C<span class="feel" data-page-node-id="GpdUUbk49XjlGDmL5EnefA">山顶极冷</span></div>
+        </div>
+        <!-- 9/29 -->
+        <div class="temp-row" data-page-node-id="TRmg5fOBmgspGdUE35EXS0">
+          <div class="temp-date" data-page-node-id="BUMWRm66zfr7bS86YfbJGF">9/29<span class="wd" data-page-node-id="7kiXgnYLTo3jleZ28c2Fkg">周二</span></div>
+          <div class="temp-track" data-page-node-id="NnzUdLxXqXihXqPVs8elQI">
+            <div class="temp-band band-comfort" data-page-node-id="ID6bSjYv8hIMGjGFJB5VMq"></div><div class="temp-band band-cold" data-page-node-id="0zZB6BjjUuUWHcy5kwJ9SR"></div>
+            <div class="temp-bar" style="left:8.57%;width:31.43%;background:linear-gradient(90deg,#1E40AF,#2563EB)" title="布湖划船+三峰：湖8–14°C，峰3–10°C" data-page-node-id="5FSwcAac3BKG5tcxP2XFwn"></div>
+          </div>
+          <div class="temp-val" data-page-node-id="qxCh9MStspuhI0JvzAZsHC">3–14°C<span class="feel" data-page-node-id="0K3JBvmw720mPKkyxJliRx">湖冷峰寒</span></div>
+        </div>
+        <!-- 9/30 -->
+        <div class="temp-row" data-page-node-id="ovAMOuaq2O7P4iBAcfww0N">
+          <div class="temp-date" data-page-node-id="DVMhy00kCOihtSHL0rRLne">9/30<span class="wd" data-page-node-id="sVBbDBzFwgEUIO8jPQUdv6">周三</span></div>
+          <div class="temp-track" data-page-node-id="QmhBgoEtlFeA4YRyj1tG4q">
+            <div class="temp-band band-comfort" data-page-node-id="5tjMnLakdCou74v3Tnq2aY"></div><div class="temp-band band-cold" data-page-node-id="jG5PgxIcuRoPzcwMFM90xH"></div>
+            <div class="temp-bar" style="left:28.57%;width:25.71%;background:linear-gradient(90deg,#34D399,#059669)" title="科尔蒂纳→威尼斯：白天16–19°C，夜10–14°C" data-page-node-id="2WUTISHRpniC42lZhhP1MG"></div>
+          </div>
+          <div class="temp-val" data-page-node-id="m5FTTo9bMzPkC9J3RIsLnX">10–19°C<span class="feel" data-page-node-id="TYZVrTFothMAwIncPIgq8y">凉爽</span></div>
+        </div>
+        <!-- 10/1 -->
+        <div class="temp-row" data-page-node-id="owZThZwNEmWozHsR18D2gi">
+          <div class="temp-date" data-page-node-id="X3cs1k6RhhRlppXSipFTNN">10/1<span class="wd" data-page-node-id="vXL0Eu0WuowIaQR3z7YyxR">周四</span></div>
+          <div class="temp-track" data-page-node-id="YEY28WDtFYVqHDtAuIfR0J">
+            <div class="temp-band band-comfort" data-page-node-id="9TvcAYpzVaBGizYCYtavtp"></div><div class="temp-band band-cold" data-page-node-id="XzJpoUKR7NKLyEiJWHLUK5"></div>
+            <div class="temp-bar" style="left:28.57%;width:34.29%;background:linear-gradient(90deg,#34D399,#F59E0B)" title="威尼斯→佛罗伦萨：白天19–22°C，夜10–13°C" data-page-node-id="xs4EQ8vH5XmzRKJwQDWWwE"></div>
+          </div>
+          <div class="temp-val" data-page-node-id="qOgWaEg7NHNwzIxfxEreci">10–22°C<span class="feel" data-page-node-id="1UUMEuDWfsDJ6jBOfWMl01">舒适</span></div>
+        </div>
+        <!-- 10/2 -->
+        <div class="temp-row" data-page-node-id="4U0vz1Dik0tkokWHkOdIrS">
+          <div class="temp-date" data-page-node-id="1HrTYuA5gv3tP3hXAFLmdU">10/2<span class="wd" data-page-node-id="9iSGxoGjCeE2WN62a95tDd">周五</span></div>
+          <div class="temp-track" data-page-node-id="LBMo8Es4hdNsxYcqWlB2Iv">
+            <div class="temp-band band-comfort" data-page-node-id="2ZQpi5ELAAi7eeXWAY33Up"></div><div class="temp-band band-cold" data-page-node-id="g8RrbXrKZjbEXpTxod6wbK"></div>
+            <div class="temp-bar" style="left:28.57%;width:37.14%;background:linear-gradient(90deg,#34D399,#F59E0B)" title="乌菲兹+老城深度：白天20–23°C，夜10–13°C" data-page-node-id="maZR3gi2IxztCXNuxZZIPO"></div>
+          </div>
+          <div class="temp-val" data-page-node-id="txvuV5BvkXXZiGEqM95vKg">10–23°C<span class="feel" data-page-node-id="9gqvdMNGpUVz60Y1q6t375">舒适</span></div>
+        </div>
+        <!-- 10/3 -->
+        <div class="temp-row" data-page-node-id="cGm1qX5BizBUF40Klswr5T">
+          <div class="temp-date" data-page-node-id="BvdAa08M8kyjodNuFeL8MK">10/3<span class="wd" data-page-node-id="Cv23Tv7uTXh5YhjK5mjPYt">周六</span></div>
+          <div class="temp-track" data-page-node-id="RKvUCZCjSWHtGfILzgzQcq">
+            <div class="temp-band band-comfort" data-page-node-id="XPdx2TKLd97LQqo9r7rbcc"></div><div class="temp-band band-cold" data-page-node-id="IQdffF76UUGYis8iUTQXJL"></div>
+            <div class="temp-bar" style="left:28.57%;width:31.43%;background:linear-gradient(90deg,#34D399,#F59E0B)" title="佛罗伦萨→米兰：白天18–21°C，夜10–13°C" data-page-node-id="bvUtDexC9iL5Kd1R1dfLZ7"></div>
+          </div>
+          <div class="temp-val" data-page-node-id="pv2SmLTbju3ARaXsBpp9Ql">10–21°C<span class="feel" data-page-node-id="X0QPuF7nWuvwm6QDAOm7Of">舒适</span></div>
+        </div>
+        <!-- 10/4 -->
+        <div class="temp-row" data-page-node-id="bNqqfH052lJDSojdQlEEJw">
+          <div class="temp-date" data-page-node-id="GxtEoX8hHAExhn4aEGKwbu">10/4<span class="wd" data-page-node-id="XF6siYrdkHqwRhXBt1Vnru">周日</span></div>
+          <div class="temp-track" data-page-node-id="aPHSCR3VSPazEQhSxTvfAa">
+            <div class="temp-band band-comfort" data-page-node-id="O2ttorKP1VcCt1UpiDp4jE"></div><div class="temp-band band-cold" data-page-node-id="o7Z6z44ZyilavXHUjDU96e"></div>
+            <div class="temp-bar" style="left:25.71%;width:31.43%;background:linear-gradient(90deg,#3B82F6,#059669)" title="米兰逛街：白天17–20°C，夜9–12°C" data-page-node-id="ETtAVGfKsHIs3upYHcU2ji"></div>
+          </div>
+          <div class="temp-val" data-page-node-id="EYKNS1CUUyUdlfI0Cht81Z">9–20°C<span class="feel" data-page-node-id="2ZkZuj0UQKVYXcpTjHJnZy">舒适偏湿</span></div>
+        </div>
+        <!-- 10/5 -->
+        <div class="temp-row" data-page-node-id="SIOpNkeYbLB5iQNQTYr07N">
+          <div class="temp-date" data-page-node-id="A6iJ5ZDWCd5F1B7sqEpzE6">10/5<span class="wd" data-page-node-id="CCASYpGINKSGHr135I7WXP">周一</span></div>
+          <div class="temp-track" data-page-node-id="0aDzvEj6HCk3DzgDyYajw2">
+            <div class="temp-band band-comfort" data-page-node-id="cwc405k6XLwlBqOriqS7Jw"></div><div class="temp-band band-cold" data-page-node-id="G0a3vZtcHTlqax0Arj1Gdh"></div>
+            <div class="temp-bar" style="left:42.86%;width:14.29%;background:linear-gradient(90deg,#94A3B8,#64748B)" title="返程：机舱空调偏冷" data-page-node-id="SGr8t2fpXoRfzbU7P9K89U"></div>
+          </div>
+          <div class="temp-val" data-page-node-id="TBPqjYxXqLN2EfHA4qzZqk">—<span class="feel" data-page-node-id="DRaEmTbWJrI5uNGgrDFVvd">机舱偏冷</span></div>
+        </div>
+      </div>
+
+      <div class="temp-axis" data-page-node-id="XpHlhVZ8oDT5d0DVYqpqd6">
+        <div class="temp-date" data-page-node-id="qaotBDF1tbAYN46iJjssVT"></div>
+        <div class="temp-track" data-page-node-id="TedugG6Fg9z1dLfBxH27qN"><span data-page-node-id="L6xfzEjvWG666JGGy8hncH">0°C</span><span data-page-node-id="axsIsVjOirVfQF5XwbpLWS">5</span><span data-page-node-id="vw5ADxsZukqisA0OPDMqNN">10</span><span data-page-node-id="H24qaDTrztGjaRj0Jau5WA">15</span><span data-page-node-id="HVKr2OTZodXBp1vEMYazlN">20</span><span data-page-node-id="FaQ7mxvzl9v9aHDsLJxZBG">25</span><span data-page-node-id="DKEb3BFeF3kRoiwnOad9QE">30</span><span data-page-node-id="TiSs408yRTCkyo9xc7jW10">35°C</span></div>
+        <div class="temp-val" data-page-node-id="ofO2xRm2FAl8PAB8b5B8XE"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 逐日穿搭 ============ -->
+  <section data-page-node-id="9wqJbp0VxovMRdSK9DcLlT">
+    <div class="sec-head" data-page-node-id="aBINW1Qc2KMMeRoHluduFW">
+      <h2 data-page-node-id="mrC23IHeFnju8yse9k7eDi">逐日穿搭建议</h2>
+      <span class="tag" data-page-node-id="GklzBlbCpUR803S11o3v6s">冷热用左侧色条区分 · 9/28–29 为全程重点</span>
+    </div>
+
+    <div class="days" data-page-node-id="L5yeWTDn7vqzF714epmER8">
+
+      <div class="day t-hot" data-page-node-id="hGj8VctRJSH7338Gc1vxjZ">
+        <div class="day-top" data-page-node-id="S5PP4u0U0DZqLZvYzfuIGw"><div class="day-date" data-page-node-id="7uYoIPMmqOiCIJkqG6JMA1">9/25<span class="wd" data-page-node-id="03L069TfyEvQybYRHrgRkT"> 周五</span></div><div class="day-temp" style="background:#FFF7ED;color:#EA580C;border:1px solid #FDBA74" data-page-node-id="GNvnOY6cPSrFs8wBtk53Hi">30–33°C</div></div>
+        <div class="day-body" data-page-node-id="EetZdCns5ywMiIa0P3Mkfe">
+          <div class="day-row" data-page-node-id="471lTkqTQDOaeYjm1H17E1"><span class="k" data-page-node-id="aCM93pdkiGssufx3Bottxn">行程</span><span class="v" data-page-node-id="lH3a1yZ9kaAfEyK3fUPiP2"><strong data-page-node-id="ArzxxRQBogqmzjKm49HRrC">深圳→香港→曼谷</strong> · 出发 + 机场 + 飞行</span></div>
+          <div class="day-row" data-page-node-id="UZoCLxJHDY7jgMZd0KRwcz"><span class="k" data-page-node-id="mB3pfEINiJnt6fVJaMHK88">体感</span><span class="v" data-page-node-id="zFP7CmKJCmpPVkVwJtA3cx">30–33°C 湿热</span></div>
+          <div class="day-row" data-page-node-id="aFkKv5VZ1elnMwsIBKrmlO"><span class="k" data-page-node-id="T4UvtguNovHpIfyMDwyKqJ">穿搭</span><span class="v" data-page-node-id="rSCbDhYG2Y1e3YkR3UhIuP">轻薄夏装：短袖 / T 恤 + 薄长裤；薄防晒衫</span></div>
+          <div class="day-row" data-page-node-id="ZcFuMt1RK3pvR9kQDXsFEw"><span class="k" data-page-node-id="Y0Qo9kfsG4lrE8urKGzP5i">提醒</span><span class="v" data-page-node-id="94Hmi7YHERCExnU4mLBWlS">随身包塞一件可压缩薄外套 + 长裤——次日早 7 点落地慕尼黑即入 15°C 清晨</span></div>
+        </div>
+        <div class="day-strip" data-page-node-id="G2DQfSfj2LGrBEFFtSaxYc"></div>
+      </div>
+
+      <div class="day t-cool" data-page-node-id="sKUA7BJLqbwM2p4EgQWB4t">
+        <div class="day-top" data-page-node-id="xNRkph5PXMIx0WGbs7qosl"><div class="day-date" data-page-node-id="gK9sPKsXyVuGjFDppzlS8U">9/26<span class="wd" data-page-node-id="1XYT0eaogHYCw6z92lj1Y9"> 周六</span></div><div class="day-temp" style="background:#EFF6FF;color:#2563EB;border:1px solid #93C5FD" data-page-node-id="tPl3WMVsEbrGObC5GQ6y66">15–20°C / 夜 5–9°C</div></div>
+        <div class="day-body" data-page-node-id="WHybumaDicNqJbuT9H5KpF">
+          <div class="day-row" data-page-node-id="UGTjdQi5F0D02cWLUVjPX0"><span class="k" data-page-node-id="ptNJJdVW9NhItV66r13osS">行程</span><span class="v" data-page-node-id="IN7jJOlheAKOLtXzf8Zh6y"><strong data-page-node-id="D0EzfrLdKpkCCzr1OU5ENu">慕尼黑啤酒节</strong> · 老城 + 啤酒节</span></div>
+          <div class="day-row" data-page-node-id="e6TmcTlzI557DcrUKgrBUt"><span class="k" data-page-node-id="4VOAspeF6JSSJ4JjXFGEiu">体感</span><span class="v" data-page-node-id="I4bUvWe5VmxG1mnTCFBU4m">白天 15–20°C，夜 5–9°C</span></div>
+          <div class="day-row" data-page-node-id="Yc2usl6ebh3U828tVUyZRZ"><span class="k" data-page-node-id="Fv7USRpcGGshDAt1vZeFOv">穿搭</span><span class="v" data-page-node-id="TQQEho6URIdw4L2m1dFnfE">长袖 + 针织 / 卫衣 + 夹克 / 风衣；牛仔裤 + 运动鞋</span></div>
+          <div class="day-row" data-page-node-id="xdCusIqX5k7ckdJSdaBiT1"><span class="k" data-page-node-id="jGhWBDbnfEjoQWFgCcCtyW">提醒</span><span class="v" data-page-node-id="AUL61VjP6hT4uiv2XCeCmK">傍晚骤冷，外套须扛到 5–8°C；帐篷内闷热、户外冷靠分层；带折叠伞 / 防水外套</span></div>
+        </div>
+        <div class="day-strip" data-page-node-id="OlLkSZJK2GsseqWzNCExsq"></div>
+      </div>
+
+      <div class="day t-cold" data-page-node-id="W6SI1DEJdvDBejBfwO6Fp0">
+        <div class="day-top" data-page-node-id="NvIJMOhTtc4MgVbKSSykYp"><div class="day-date" data-page-node-id="ciWTYoB6cTxvB46ak17le5">9/27<span class="wd" data-page-node-id="xhCdHGIwBqWmeSWoJWNz3q"> 周日</span></div><div class="day-temp" style="background:#DBEAFE;color:#1E40AF;border:1px solid #60A5FA" data-page-node-id="r7LyhAO2HFvD0kjVfQBqyk">14–18°C / 早晚 4–8°C</div></div>
+        <div class="day-body" data-page-node-id="CfHhSeWBIwUygN8HQ0qTvM">
+          <div class="day-row" data-page-node-id="uLHPQ00nIiInSbHAp1BG9e"><span class="k" data-page-node-id="mftLA1ztdUBumOYEAxk8mx">行程</span><span class="v" data-page-node-id="RwXINecsmkhbGiRDFb7HLY"><strong data-page-node-id="y24zFk2bTSzgzGGV6JJZOd">慕尼黑 → 博尔扎诺 → 富内斯 → 塞尔瓦</strong> · 进入多洛米蒂山谷</span></div>
+          <div class="day-row" data-page-node-id="f4oqacvKgcfrca5OtMZEGl"><span class="k" data-page-node-id="7yMJiwahJyeNln1dVaLswi">体感</span><span class="v" data-page-node-id="GSC0g7hkAEplfe4cBciRW5">谷白天 14–18°C，早晚 4–8°C</span></div>
+          <div class="day-row" data-page-node-id="qRG8RQxnhYHh1g6aCEKf0B"><span class="k" data-page-node-id="0REHsSshnhNADcJN6egEBv">穿搭</span><span class="v" data-page-node-id="P7m9e2YjlaAj7sPgX4llL8">保暖升级：长袖打底 + 抓绒 / 薄羽绒 + 防风外套</span></div>
+          <div class="day-row" data-page-node-id="AIXCjmigHNFjmTGtM9FxMc"><span class="k" data-page-node-id="LGeWRxm7zAaF7yCrb4aTtL">提醒</span><span class="v" data-page-node-id="ZHdMUjtvWIQ0R7QnxSkOIw">起换抓地力好的鞋（徒步鞋 / 厚底运动鞋）</span></div>
+        </div>
+        <div class="day-strip" data-page-node-id="oEF5kOqRvzLU1Z4jS1Etcs"></div>
+      </div>
+
+      <div class="day t-freeze" data-page-node-id="MjQSKvqUM0OBRVBn2EiVCE">
+        <div class="day-top" data-page-node-id="ABWg69zuAXP3MGAquTDlgS"><div class="day-date" data-page-node-id="KatViPCutteGCxIglpnUDR">9/28<span class="wd" data-page-node-id="AfBQGcuckA58r8CeuOEnWf"> 周一</span> <span class="badge" data-page-node-id="Q312nhVHD8Fl5ELEzSylt7">全程最冷</span></div><div class="day-temp" style="background:#DBEAFE;color:#1E3A8A;border:1px solid #3B82F6" data-page-node-id="ug1Ge3eNJo4N8sdl41hfde">5–12°C / 早晚 0–5°C</div></div>
+        <div class="day-body" data-page-node-id="cLnBXBrf0NjAqfizOKU1TC">
+          <div class="day-row" data-page-node-id="HP6PX6Ktpm29U21fnUScxX"><span class="k" data-page-node-id="L19QUqTG4sFh2yTi0fT1DZ">行程</span><span class="v" data-page-node-id="IeMxwVrf8mnYCPhNqrHv7x"><strong data-page-node-id="9RtpDtuA4WpODTopOgIMVH">刀锋山 + 休斯高原</strong>（山顶 2000–2500m）</span></div>
+          <div class="day-row" data-page-node-id="Mo7vgRnQOUbCLVllkay9Hq"><span class="k" data-page-node-id="XWrhn9I2sO9yA2oTmrus7d">体感</span><span class="v" data-page-node-id="XA77B6EeVkTwGIQy4glznz">白天 5–12°C，早晚 0–5°C，风大体感更低</span></div>
+          <div class="day-row" data-page-node-id="8JqJYJinuCe0HBUOltE7Yp"><span class="k" data-page-node-id="1JRbkhwfZXMp8gnWH0D9rc">穿搭</span><span class="v" data-page-node-id="KKjiTkUVUxpcxNlIEL2FQG">全套分层：速干打底 + 抓绒 + 薄羽绒 + 防风防水冲锋衣；保暖 / 加绒裤；<strong data-page-node-id="DT3x5Me5uALcuiDRnoGhzD">帽子 + 手套 + 围脖必备</strong>；太阳镜</span></div>
+          <div class="day-row" data-page-node-id="WtONyDDm3ZTSUF1EKgvOSH"><span class="k" data-page-node-id="q2WODRP3ghdh16yj42vyDb">提醒</span><span class="v" data-page-node-id="eFe3Xn1quZhXOdIMnvagRQ">山顶风大久待更冷，风寒体感可比气温再低 5°C；防水徒步鞋</span></div>
+        </div>
+        <div class="day-strip" data-page-node-id="lpPsudir03wZji7bAuUNgH"></div>
+      </div>
+
+      <div class="day t-cold" data-page-node-id="gCTEpdFjx1jBopOvCi7EoD">
+        <div class="day-top" data-page-node-id="o4iq2dKZvI54X5ya8j2vC2"><div class="day-date" data-page-node-id="gCSZ0WLufxmq4tnfmC0kah">9/29<span class="wd" data-page-node-id="3VRD38gHFfOpGMSGjmlCVz"> 周二</span></div><div class="day-temp" style="background:#DBEAFE;color:#1E40AF;border:1px solid #60A5FA" data-page-node-id="rGtdPmLQI0CyV2VZTknqH9">湖 8–14°C / 峰 3–10°C</div></div>
+        <div class="day-body" data-page-node-id="kngDrUwWE5srBtWqQeD7M4">
+          <div class="day-row" data-page-node-id="D3vWCkISicqFsPX5axGZGU"><span class="k" data-page-node-id="YmIPMxlnVXH9sVrLKvl4Jp">行程</span><span class="v" data-page-node-id="qXglnGeCM7THyfbiuA8T1W"><strong data-page-node-id="4mnjFqMdpVm7BOv7fCk4Pj">布湖划船 + 三峰</strong>（湖 1500m + 峰 2300m）</span></div>
+          <div class="day-row" data-page-node-id="y4ge1bnx54gvJ3UPI36AcX"><span class="k" data-page-node-id="hA2ApoxPnkmyMrWSCgqdMu">体感</span><span class="v" data-page-node-id="o4iK9NNz19qppItvTTUQUO">湖 8–14°C，峰 3–10°C</span></div>
+          <div class="day-row" data-page-node-id="ZiCIyhJSxRmwWbRdKOwLCR"><span class="k" data-page-node-id="L2gYNLsoFYYch703JxK1je">穿搭</span><span class="v" data-page-node-id="pr7WDLFpkNAPLFX4033ZEW">同 9/28 全套分层；划船加手套（握桨）</span></div>
+          <div class="day-row" data-page-node-id="1VWXdp32rGoysZNxi7JYBN"><span class="k" data-page-node-id="ncCve57xWmLGPyGt5pNjtA">提醒</span><span class="v" data-page-node-id="phdUBNpg9swX4JTBuPtQlw">水边阴凉更冷，三峰魔戒之路全天高海拔，帽子手套别摘</span></div>
+        </div>
+        <div class="day-strip" data-page-node-id="tW9JGR9WLErHWQFaGjmRHA"></div>
+      </div>
+
+      <div class="day t-mild" data-page-node-id="HMewiVjcBO7sBYrZnW3vJR">
+        <div class="day-top" data-page-node-id="FMeXdmaDlSKyUtajfrOcIc"><div class="day-date" data-page-node-id="XCb0edomOPJSfkpfBgP9TQ">9/30<span class="wd" data-page-node-id="ytKD6bWiUoOEZq3iIMh8CV"> 周三</span></div><div class="day-temp" style="background:#ECFDF5;color:#059669;border:1px solid #6EE7B7" data-page-node-id="koVAyyaPelgOKhLoSAp4Yt">16–19°C / 夜 10–14°C</div></div>
+        <div class="day-body" data-page-node-id="zUxil3cSFg1g9Xixs7dsFo">
+          <div class="day-row" data-page-node-id="DR2CQWlAmsgCbPsWiiwWHS"><span class="k" data-page-node-id="3oSbEdflhIGYMilOEJfZPt">行程</span><span class="v" data-page-node-id="lWjf7J0RGq1ciMnqnZnvjn"><strong data-page-node-id="2wujm4uGUrY3tLUvc9oVGf">科尔蒂纳 → 威尼斯</strong> · 山区回城市</span></div>
+          <div class="day-row" data-page-node-id="rFk4MfimTk9rIrIIAC2cSU"><span class="k" data-page-node-id="28LcGT7GlNtwZXpSCqRxgz">体感</span><span class="v" data-page-node-id="TVOdYWDZOkfiLnnu5Qko48">白天 16–19°C，夜 10–14°C</span></div>
+          <div class="day-row" data-page-node-id="6yZWV7a0jmyihqNBZ22zYi"><span class="k" data-page-node-id="ePBNrVoX6neMRXpszN3ECp">穿搭</span><span class="v" data-page-node-id="rW7rSqFyueVZTt8Yl1MrlR">脱下厚重保暖层：长袖 + 薄针织 / 卫衣 + 轻外套</span></div>
+          <div class="day-row" data-page-node-id="HTEsjFwtsNcWpHNjLPeTY6"><span class="k" data-page-node-id="fDZwJiIfbDQ7VP68YNjFiL">提醒</span><span class="v" data-page-node-id="DRWuq4W9vWIIN4QXYDFWb9">晚上逛圣马可夜景水边有风，带条围巾</span></div>
+        </div>
+        <div class="day-strip" data-page-node-id="EtRCyyAUlLp7o2QBXw1zsP"></div>
+      </div>
+
+      <div class="day t-mild" data-page-node-id="qcH96VpI0NFaW79MQyZ2SM">
+        <div class="day-top" data-page-node-id="Wh2YLAQhrokHqle3wdB4kY"><div class="day-date" data-page-node-id="dF3kGBMUcxsFSbOCFAJN5S">10/1<span class="wd" data-page-node-id="Q6jbq1CMpl5349TzsqoZNw"> 周四</span></div><div class="day-temp" style="background:#ECFDF5;color:#059669;border:1px solid #6EE7B7" data-page-node-id="hYBk93uYby1C7s7xEcgDFj">19–22°C / 夜 10–13°C</div></div>
+        <div class="day-body" data-page-node-id="1rOgBWSmNwzePWqJiwaaLc">
+          <div class="day-row" data-page-node-id="HLEZHfckkQDXafBPbn8ZgC"><span class="k" data-page-node-id="3RCxNfnlSaS65kFEgTrnsM">行程</span><span class="v" data-page-node-id="by2YUshRgMpbm1tlhpcII8"><strong data-page-node-id="iFSuW6W5ToWF7RS4TiCoZd">威尼斯 → 佛罗伦萨</strong> · 彩虹岛 + 高铁 + 看日落</span></div>
+          <div class="day-row" data-page-node-id="QwnkAVoh0wjH8uP2O6ul1g"><span class="k" data-page-node-id="0YxyCT5isk8PRCSDXMjlYS">体感</span><span class="v" data-page-node-id="awR6HUDLW4bHidvfQTHdHv">白天 19–22°C，夜 10–13°C</span></div>
+          <div class="day-row" data-page-node-id="FtA5asPL28FAw2AvHQOEDP"><span class="k" data-page-node-id="xR8oB8zmBYR3KFBdqsxRPr">穿搭</span><span class="v" data-page-node-id="ENqLSlSHIg22koYMqWY4zJ">长袖 T / 衬衫 + 薄夹克 / 针织开衫</span></div>
+          <div class="day-row" data-page-node-id="VAmYXCSUqJ884SrOLehq74"><span class="k" data-page-node-id="5oMWfp84z0cHpjeB09KDmO">提醒</span><span class="v" data-page-node-id="fokDFVncSXCoAn5wqP6bzp">米开朗基罗广场日落（17:30–19:30）山顶风大、日落降温，外套必带</span></div>
+        </div>
+        <div class="day-strip" data-page-node-id="kUJQh9EceAlTXlB3ZBdV0f"></div>
+      </div>
+
+      <div class="day t-mild" data-page-node-id="3vy6WGZU5S5ySAimvKiOPd">
+        <div class="day-top" data-page-node-id="OpLAEXh1D5h4FiQSc1aYHY"><div class="day-date" data-page-node-id="ZgZDrwrnFttBoajkvXjicT">10/2<span class="wd" data-page-node-id="A0GKdGfc6zaF04JqD5WLWW"> 周五</span></div><div class="day-temp" style="background:#ECFDF5;color:#059669;border:1px solid #6EE7B7" data-page-node-id="TPGfhBuQB14znMZDg1MeHm">20–23°C / 夜 10–13°C</div></div>
+        <div class="day-body" data-page-node-id="FrCLHLrXMmY4qrIUB9nAXB">
+          <div class="day-row" data-page-node-id="OmKY6yfFnuv2dhMnSDz89e"><span class="k" data-page-node-id="mLM3vLYb6RpXwbjacVeWWQ">行程</span><span class="v" data-page-node-id="idJYSLk8zuc0eN7U5GTGSe"><strong data-page-node-id="6BBfY1xq6LcNUpCngyDy6g">乌菲兹 + 老城深度</strong> · 艺术全天暴走</span></div>
+          <div class="day-row" data-page-node-id="kUB9obordsdTqbbSP08xDm"><span class="k" data-page-node-id="DAhztP2c9MHHhm5to1VA3e">体感</span><span class="v" data-page-node-id="pSd9rCMIZkoswSyzUZhsM9">白天 20–23°C，夜 10–13°C</span></div>
+          <div class="day-row" data-page-node-id="G6f4apl2uJY0xBbjLCcMLs"><span class="k" data-page-node-id="aY6lbY35hNXQYNEpdxdVrG">穿搭</span><span class="v" data-page-node-id="FexMluvVNS4dmCj4GgzulV">长袖 + 薄外套（方便穿脱）；舒适步行鞋</span></div>
+          <div class="day-row" data-page-node-id="PN7qkaNUWiFm65dzjWTLrs"><span class="k" data-page-node-id="TfYdiAlRvrWreHKfqhCVsA">提醒</span><span class="v" data-page-node-id="swZKuBfll3vxyo9icFD4ct">乌菲兹 8:15 进场早晨偏凉；室内恒温偏凉；17:00 旧宫塔顶风大</span></div>
+        </div>
+        <div class="day-strip" data-page-node-id="pe1m3tRL8K3B7jSPo7SBDi"></div>
+      </div>
+
+      <div class="day t-mild" data-page-node-id="3ddqpZc01OIKJWpwBTAr48">
+        <div class="day-top" data-page-node-id="wbq2S0sy7C2ju8gzlHSK4G"><div class="day-date" data-page-node-id="nUieqlb7aB1hkdFTFLGs8Q">10/3<span class="wd" data-page-node-id="DJGbg5o9JjeriYlFleMu1d"> 周六</span></div><div class="day-temp" style="background:#ECFDF5;color:#059669;border:1px solid #6EE7B7" data-page-node-id="XUvuDYewrIqB6p6ZDLIx1n">18–21°C / 夜 10–13°C</div></div>
+        <div class="day-body" data-page-node-id="1TeWvqqmh7NQGlo5uEX5qP">
+          <div class="day-row" data-page-node-id="PvqrhHj0L6g6HFGJizjKrg"><span class="k" data-page-node-id="okJxrQnaOQ8dUiSobwnmYE">行程</span><span class="v" data-page-node-id="CIGKM4lHe6QuO8osSQEQMc"><strong data-page-node-id="4uIUDHu0h6dP7k2AWweaPK">佛罗伦萨 → 米兰</strong> · 皮蒂宫 + 波波里 + 高铁 + 大教堂</span></div>
+          <div class="day-row" data-page-node-id="bV9fvu9fhx49KndZCoz5NO"><span class="k" data-page-node-id="sQafiIfhLJ2DmQNArdBdNx">体感</span><span class="v" data-page-node-id="DQtzObXTLSxHEVrYXD4C9H">白天 18–21°C，夜 10–13°C</span></div>
+          <div class="day-row" data-page-node-id="HVzK6TrCei5BGo73KYQGCo"><span class="k" data-page-node-id="lkWiVXGZe5Sr3PCKhytF42">穿搭</span><span class="v" data-page-node-id="OBPnA96VQY8oUYUM3d9ZEH">长袖 + 薄外套 + 围巾</span></div>
+          <div class="day-row" data-page-node-id="z6pMESAQruithnGIkCetDK"><span class="k" data-page-node-id="ez6INW2tqIG067AvrjsgjJ">提醒</span><span class="v" data-page-node-id="MeK4Kff4wWov25c1UXdRyU">波波里花园 8:15 户外早晨凉；米兰大教堂 18:00 登顶天台风大</span></div>
+        </div>
+        <div class="day-strip" data-page-node-id="43EKqq4bO41LweR3uzh3hc"></div>
+      </div>
+
+      <div class="day t-cool" data-page-node-id="k4Xqs6W9M8yT0WpeIvlKUE">
+        <div class="day-top" data-page-node-id="Oasmrj7YzQ5ZHHsg6KDf3U"><div class="day-date" data-page-node-id="ZGkYngB3bPU61OArywVhAz">10/4<span class="wd" data-page-node-id="g90Fp2l8hCGnVey0hO9SYz"> 周日</span></div><div class="day-temp" style="background:#EFF6FF;color:#2563EB;border:1px solid #93C5FD" data-page-node-id="fm6mV90dQia1gZHXva5Agq">17–20°C / 夜 9–12°C</div></div>
+        <div class="day-body" data-page-node-id="TB49p7cOeGFc4G9DQy8lEx">
+          <div class="day-row" data-page-node-id="KBNrLS6OxD4iOUzaViqn8h"><span class="k" data-page-node-id="1EI3dMaA7C7FwIGh2Jrikt">行程</span><span class="v" data-page-node-id="Zocm9YlvhFxTFFnLN8qLZS"><strong data-page-node-id="ZldpF844uQtfbSnGM8o6Mi">米兰逛街</strong> · 购物</span></div>
+          <div class="day-row" data-page-node-id="1hD3HDphFIsIi3ANm3zMEs"><span class="k" data-page-node-id="DLDqBEtQX2M5gYaNWZ7ocA">体感</span><span class="v" data-page-node-id="dTSeusODQeHWFMbHjddDUb">白天 17–20°C，夜 9–12°C</span></div>
+          <div class="day-row" data-page-node-id="ftTc4bokQcdNQtatp6bESZ"><span class="k" data-page-node-id="vhzqkClUPfpBxODpp1Wdci">穿搭</span><span class="v" data-page-node-id="5lLA2neauD5VYtzFm4TYZw">长袖 + 外套 + 折叠伞（米兰 10 月偏湿）</span></div>
+          <div class="day-row" data-page-node-id="iNMe7w5ebhFKyApDzA7AYf"><span class="k" data-page-node-id="h1oepQtw1RL4hGSar29iAP">提醒</span><span class="v" data-page-node-id="XNdpKmuGDB57HP5OAn0r6i">全天逛街，舒适鞋优先</span></div>
+        </div>
+        <div class="day-strip" data-page-node-id="X9eyyXX2otefp05GDxxRf0"></div>
+      </div>
+
+      <div class="day t-cool" data-page-node-id="IJwCAIBRTV7TndO5HtnboN">
+        <div class="day-top" data-page-node-id="DmSsuQDu1SUtLZoHiFkSCv"><div class="day-date" data-page-node-id="QpZ9QNEn8MLqPARQjKYmqo">10/5<span class="wd" data-page-node-id="SOypeNO8Yr29GECfB2tFUu"> 周一</span></div><div class="day-temp" style="background:#F3F4F6;color:#4B5563;border:1px solid #D1D5DB" data-page-node-id="SmCmLCDTMMhmUOOs5aoQCJ">机舱偏冷</div></div>
+        <div class="day-body" data-page-node-id="VIBI5QY8U1TSTjg2RMFxuZ">
+          <div class="day-row" data-page-node-id="269U2mU1StPqdvetOIdaPh"><span class="k" data-page-node-id="GlNxp383aecVtKHVcAYAkn">行程</span><span class="v" data-page-node-id="jjENnSGOFrC6lJhdp4aCJC"><strong data-page-node-id="3Lm9RWOpaBM8J8zR6AwMr7">返程</strong> · 机场 + 飞行</span></div>
+          <div class="day-row" data-page-node-id="IRiAjce4Ez7T2NohsK9gO1"><span class="k" data-page-node-id="jeJGkJu9xdAahZD728FymE">体感</span><span class="v" data-page-node-id="lyRqCd1EIoQY1Fh0AazeTO">机舱偏冷</span></div>
+          <div class="day-row" data-page-node-id="smpJIJOP7qfMrLdda8HCHW"><span class="k" data-page-node-id="sO4k62fCcKPupXjVK0sAK9">穿搭</span><span class="v" data-page-node-id="azWmetAdPIFXDXIxcPtTRU">舒适长袖 + 外套，带件薄披肩 / 外套上机</span></div>
+          <div class="day-row" data-page-node-id="RTxTGUoAZczjj7rg9FyLsJ"><span class="k" data-page-node-id="EluiBPXobqwERdHXGjGID3">提醒</span><span class="v" data-page-node-id="DhZGJoRGhF2wRYj9ehDOEU">机舱空调冷，随身带保暖层</span></div>
+        </div>
+        <div class="day-strip" style="background:#9CA3AF" data-page-node-id="7MEvLbaCdhYVjwyivPLW75"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ 分层打包清单 ============ -->
+  <section data-page-node-id="uCYU6jJdJTwWsJ4uHW1gBt">
+    <div class="sec-head" data-page-node-id="PQ2rE3j8VTuf0GgFzJrDjm">
+      <h2 data-page-node-id="mYIIM9a01AiyBQ0MRypcPZ">分层打包清单</h2>
+      <span class="tag" data-page-node-id="8x2GuSwAXzrdEVqlFlEF27">一套衣服覆盖 0°C → 33°C</span>
+    </div>
+
+    <div class="pack" data-page-node-id="MavQ4lFiw6e4iCLAWzBoMl">
+      <div class="pack-item" style="border-top-color:#059669" data-page-node-id="2jNp54iwVgkCk3VHi7zikg">
+        <div class="cat" data-page-node-id="wo3tRD1h1yYXUVg8kvOAwn"><span class="dot" style="background:#059669" data-page-node-id="b1FD9EMNJZyvQYjzegFeTl"></span>基础层</div>
+        <div class="what" data-page-node-id="EPOJriCwUUMh5orJzioOt0">速干 T 恤 / 长袖 3–4 件</div>
+        <div class="where" data-page-node-id="BK0Podo7hHNuHEMDiVNDn2">服务：全程</div>
+      </div>
+
+      <div class="pack-item key" data-page-node-id="XyhKEAXQe7DFh59ZIvd4Kf">
+        <div class="cat" data-page-node-id="GtCKYdHrlniTFZnD6ZpF0W"><span class="dot" style="background:#2563EB" data-page-node-id="9pt9fXjOOp5dcLxgo7lt9L"></span>中间层<span class="tag" data-page-node-id="RVnx8WGDapaeVDBzFeVIBh">关键</span></div>
+        <div class="what" data-page-node-id="RUXoMvF5Bl6ipa3UUJosp0">抓绒 1 件 + 可压缩薄羽绒 1 件</div>
+        <div class="where" data-page-node-id="PrQAECdDhP9oEUwu7V6POA">服务：多洛米蒂 9/27–29 + 慕尼黑夜晚</div>
+      </div>
+
+      <div class="pack-item" style="border-top-color:#1E40AF" data-page-node-id="7m7r6RJqMrVNYgF1ajcaZS">
+        <div class="cat" data-page-node-id="3mnvNEqVLk0a83tZuBvIFO"><span class="dot" style="background:#1E40AF" data-page-node-id="wTUanZhiEJsYkos5Da8b80"></span>外层</div>
+        <div class="what" data-page-node-id="FBH9c7Ti0kOcqLTKiwKYoZ">防风防水冲锋衣 1 件（防雨 + 挡风）<br data-page-node-id="ElqXzcIoBkQiaw0v0k5XIX">轻风衣 / 夹克 1 件（城市日常）</div>
+        <div class="where" data-page-node-id="XtmQEIZaWgnTRGNXmxQq1C">服务：多洛米蒂 + 下雨天 / 城市</div>
+      </div>
+
+      <div class="pack-item" style="border-top-color:#7C3AED" data-page-node-id="rYJgBa4oeHGpjCtydr9cWD">
+        <div class="cat" data-page-node-id="D21TpvkPqG8ad3kYVNxEBc"><span class="dot" style="background:#7C3AED" data-page-node-id="Ws3OAiI2z50GitwM2LFAVP"></span>下装</div>
+        <div class="what" data-page-node-id="mU8XKu3KzGDkvmkfV2fD50">牛仔裤 2 条 + 舒适长裤 / 保暖裤 1 条</div>
+        <div class="where" data-page-node-id="MguCBn12LsErcb1mf4hMFr">服务：保暖裤专攻多洛米蒂</div>
+      </div>
+
+      <div class="pack-item" style="border-top-color:#B45309" data-page-node-id="bMxf9EiJQLYmpnyqTGbT7c">
+        <div class="cat" data-page-node-id="S2SGEflLK796GKifEgAJLk"><span class="dot" style="background:#B45309" data-page-node-id="qVOmqSCG22VYkMaHAg8gBH"></span>鞋</div>
+        <div class="what" data-page-node-id="9FuC8JkrGc4GvUKS9rkFOz">防水徒步鞋 1 双 + 舒适运动鞋 1 双</div>
+        <div class="where" data-page-node-id="XFECQtxHBoNOa69moZ2CWB">服务：徒步鞋多洛米蒂，运动鞋城市暴走</div>
+      </div>
+
+      <div class="pack-item" style="border-top-color:#DC2626" data-page-node-id="DsOvyg6aZsO7fJtPQ6Ipen">
+        <div class="cat" data-page-node-id="kRqxOXXPpClhXSBqKSujgg"><span class="dot" style="background:#DC2626" data-page-node-id="4wv9wG4vqm8ZFEOHEoGTCs"></span>配件</div>
+        <div class="what" data-page-node-id="RKe6Nsyf5s6FjSOb28FhGB">帽子、手套、围脖 / 围巾、太阳镜、折叠伞</div>
+        <div class="where" data-page-node-id="ljYaMapkg4XFvAHR0GaEYe">服务：帽子手套围脖是 9/28–29 山顶保命项</div>
+      </div>
+
+      <div class="pack-item" style="border-top-color:#EA580C" data-page-node-id="Yo5CZZnPz4mBCaZv8UZqEF">
+        <div class="cat" data-page-node-id="r7feBk4b0XyDrwnKEE6rXh"><span class="dot" style="background:#EA580C" data-page-node-id="DjpFwDKal0yoxMtf9BUOOD"></span>出发段</div>
+        <div class="what" data-page-node-id="1rtJyljmxvP5zsxFwnoa9w">薄防晒衫、夏装</div>
+        <div class="where" data-page-node-id="DwF0PGvzgqNPblHvyGcCVR">服务：仅 9/25 华南 / 曼谷</div>
+      </div>
+
+      <div class="pack-item" style="border-top-color:#0891B2" data-page-node-id="dEf9815I0nBp7BrUy0cIYJ">
+        <div class="cat" data-page-node-id="3ssuwIbXj1fPyT9EpCC49R"><span class="dot" style="background:#0891B2" data-page-node-id="T2M3GTaGJoLWdyzW0EV2R3"></span>证件 / 电子</div>
+        <div class="what" data-page-node-id="MudqxD7DFCgudbryiPwwV3">护照、申根签、保险、充电宝、转换插头</div>
+        <div class="where" data-page-node-id="st5d9gjE8w9mSWsz5wVTcA">服务：全程 · 出行基础</div>
+      </div>
+
+      <div class="pack-item" style="border-top-color:#64748B" data-page-node-id="nrimcTR8MJgqzOKrtH1MDa">
+        <div class="cat" data-page-node-id="otj0xZH3YuSzBjIrrTpJLk"><span class="dot" style="background:#64748B" data-page-node-id="yHr1bkounxoQuDqtDSPDQf"></span>随身登机包</div>
+        <div class="what" data-page-node-id="rkMHj8t2iFAtxSj023cdPx">薄外套 + 保暖层 + 薄披肩</div>
+        <div class="where" data-page-node-id="jcTftxvmEpQMAm78wyD1gr">服务：机舱偏冷 + 落地即入冷空气</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 核心策略 ============ -->
+  <section data-page-node-id="9F8VdJRZKwI29Q8y6HJFGN">
+    <div class="sec-head" data-page-node-id="uECLCb6k0YpupTnpLGloZc">
+      <h2 data-page-node-id="BC9v7zyAkZFKczmMA9WGuZ">总体穿衣策略</h2>
+      <span class="tag" data-page-node-id="tFjBUmWswBmdJHNCZ2XHZF">分层系统 · 一套衣服打天下</span>
+    </div>
+    <div class="card strategy" data-page-node-id="3aSZEqdpR6jj52KPb5P5YN">
+      <p data-page-node-id="zgrJkgZN4Fyk5cQpYmNpc5">全程温度跨度大（约 <strong data-page-node-id="2O4XTqFyOwCPRuLN8m4xPm">0–33°C</strong>），核心策略是「<strong data-page-node-id="r2kSqqmQApD5DsCvX5Ysfj">分层系统 + 一件可压缩薄羽绒 + 防风防水外壳</strong>」，靠同一套衣物的穿脱覆盖全部场景，而非带一堆厚衣服。</p>
+      <div class="layers" data-page-node-id="G2gqwUHQVFYH81xuwBJhKY">
+        <div class="layer" data-page-node-id="nRYou0bQUOd8J7kUz3wCkp"><div class="n" data-page-node-id="qRuZhpBgQhpWCiS3RXzA9r">第 1 层 · 速干打底</div><div class="t" data-page-node-id="I2cvLEs94QKISshdPElGtV">贴身排汗，城市 / 山区间切换的万能底层</div></div>
+        <div class="layer" data-page-node-id="9UKBEy1UStzIIG8Gue6vN2"><div class="n" data-page-node-id="gkDI98AccEFSM8BFTm1awE">第 2 层 · 抓绒 + 薄羽绒</div><div class="t" data-page-node-id="4tipUVFVk7mBWAPpYXGlHF">保暖核心，冷了加、热了脱，可压缩收纳不占箱</div></div>
+        <div class="layer" data-page-node-id="cOybkhzplPYMHIUfHEW6rR"><div class="n" data-page-node-id="MynF8Wxb0f7xyvrMy8IVmL">第 3 层 · 防风防水外壳</div><div class="t" data-page-node-id="1AyfjGpSe6wCNz2IFtqysS">挡风防雨，多洛米蒂山顶和下雨天的保命层</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 一句话总结 ============ -->
+  <section data-page-node-id="5tlBvDUEwLL0Nz4sxsZg9s">
+    <div class="sec-head" data-page-node-id="YppmRlsCiLhIFPaY1qmUz5">
+      <h2 data-page-node-id="sQV0k8Dz4mW4WCYanQRaDh">一句话总结</h2>
+    </div>
+    <div class="card summary" data-page-node-id="G3nEYdWRqcFQmv9fAYCBH8">
+      <p data-page-node-id="KrTGQPULFNAdbfDTKcZahb">别把精力花在「城市冷不冷」——佛罗伦萨、米兰 10 月初大概率舒适甚至偏暖，一条薄外套 + 长袖就够。真正要重视的是 <span class="hl" data-page-node-id="pKbMtC4UodtFnnSlvPpXOr">9/28–9/29 多洛米蒂高海拔</span>：山顶白天 5–12°C、早晚 0°C 上下还刮风，一套「抓绒 + 薄羽绒 + 防水冲锋衣 + 帽子手套」是必须的，且全程就靠这一套分层的穿脱覆盖 30°C 到 0°C 的跨度。出发前 3–5 天记得看实时预报，特别是多洛米蒂那两天的降水和山顶风力。</p>
+    </div>
+  </section>
+
+  <div class="foot" data-page-node-id="lL9hd0DNEzYeBt3IyCWewL">
+    温度数据依据：WMO 1991–2020 三十年气候标准值（climatestotravel 等）· 2026 特殊性参考 Climate Impact Company 2026 年 8 月报告 · 均为「历史均值 + 趋势」合理区间，非精确预报
+  </div>
+
+</div>
+</body>
+</html>
