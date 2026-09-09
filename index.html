@@ -76,11 +76,11 @@ const days=[
 ];
 const florenceSchedule={
  '2026-10-02':{
-  note:'乌菲兹08:15 · 学院15:00 · 旧宫17:45',distance:'老城步行约5–7公里',
-  map:[['住宿',8,68,'Via Monte Oliveto 12 Firenze'],['乌菲兹',31,48,'Uffizi Gallery'],['学院美术馆',53,24,'Galleria dell Accademia Florence'],['旧宫',70,42,'Palazzo Vecchio'],['老桥',82,56,'Ponte Vecchio'],['住宿',92,70,'Via Monte Oliveto 12 Firenze']],
-  routes:[{label:'今日步行路线',mode:'walking',points:['Via Monte Oliveto 12 Firenze','Uffizi Gallery','Galleria dell Accademia Florence','Palazzo Vecchio','Ponte Vecchio','Via Monte Oliveto 12 Firenze']}],
-  notes:['乌菲兹08:15入场，学院美术馆15:00入场，旧宫17:45入场，均建议提前15–20分钟抵达。','乌菲兹、学院美术馆使用Firenze Card预约；旧宫共3张免费票。','学院美术馆到旧宫步行约15分钟，16:30离馆后时间充足。'],
-  events:[['07:30','早餐后出发','前往乌菲兹，证件、Firenze Card和预约凭证随身。','Uffizi Gallery'],['07:55','提前抵达乌菲兹','3人 · Firenze Card · PNR H1WTKJQJ。','Uffizi Gallery'],['08:15','乌菲兹美术馆','已确认预约；凭证需与有效Firenze Card同时出示。','Uffizi Gallery',true],['12:15','午餐与休息','控制节奏，为下午两个预约留体力。','Piazza della Signoria'],['14:40','提前抵达学院美术馆','3人 · Firenze Card · 预约码24107233。','Galleria dell Accademia Florence'],['15:00','学院美术馆（大卫）','已确认预约，预约服务免费。','Galleria dell Accademia Florence',true],['16:30','前往旧宫','步行约15分钟，途中可短暂休息。','Palazzo Vecchio'],['17:25','提前抵达旧宫','3人 · 票号7155577、7155578、7155579。','Palazzo Vecchio'],['17:45','旧宫','预约入场时段17:45–18:00。','Palazzo Vecchio',true],['19:15','老桥与晚餐','按闭馆离场时间灵活调整。','Ponte Vecchio']]},
+  note:'乌菲兹08:15 · 旧宫塔楼10:45 · 旧宫博物馆12:15 · 学院15:00',distance:'老城步行约5–7公里',
+  map:[['住宿',8,68,'Via Monte Oliveto 12 Firenze'],['乌菲兹',31,48,'Uffizi Gallery'],['旧宫',50,39,'Palazzo Vecchio'],['学院美术馆',69,24,'Galleria dell Accademia Florence'],['老桥',82,56,'Ponte Vecchio'],['住宿',92,70,'Via Monte Oliveto 12 Firenze']],
+  routes:[{label:'今日步行路线',mode:'walking',points:['Via Monte Oliveto 12 Firenze','Uffizi Gallery','Palazzo Vecchio','Galleria dell Accademia Florence','Ponte Vecchio','Via Monte Oliveto 12 Firenze']}],
+  notes:['乌菲兹08:15入场；旧宫塔楼10:45–11:30；旧宫博物馆12:15–12:30；学院美术馆15:00入场。','四项预约均为3人并关联各自Firenze Card；每人携带自己的卡券及对应预约PDF。','乌菲兹需在10:15左右离馆前往旧宫；塔楼结束后可在领主广场附近休息，12:00前返回博物馆入口。'],
+  events:[['07:30','早餐后出发','前往乌菲兹，证件、Firenze Card和预约凭证随身。','Uffizi Gallery'],['07:55','提前抵达乌菲兹','3人 · Firenze Card · PNR H1WTKJQJ。','Uffizi Gallery'],['08:15','乌菲兹美术馆','已确认预约；10:15左右离馆前往旧宫。','Uffizi Gallery',true],['10:30','提前抵达旧宫塔楼','3人分别出示Firenze Card与个人预约二维码。','Palazzo Vecchio'],['10:45','旧宫塔楼登顶','预约时段10:45–11:30。','Torre di Palazzo Vecchio',true],['11:30','领主广场休息','简单补给，12:00前返回旧宫博物馆入口。','Piazza della Signoria'],['12:00','提前抵达旧宫博物馆','3人分别出示Firenze Card与个人预约二维码。','Palazzo Vecchio'],['12:15','旧宫博物馆','预约入场时段12:15–12:30。','Palazzo Vecchio',true],['13:15','午餐与休息','旧宫参观结束后用餐，为学院美术馆留足时间。','Piazza della Signoria'],['14:40','提前抵达学院美术馆','3人 · Firenze Card · 预约码24107233。','Galleria dell Accademia Florence'],['15:00','学院美术馆（大卫）','已确认预约，预约服务免费。','Galleria dell Accademia Florence',true],['16:30','老桥与晚餐','按体力灵活调整。','Ponte Vecchio']]},
  '2026-10-03':{
   note:'碧提宫08:15 · 波波里花园10:15',distance:'步行＋高铁约1小时55分',
   map:[['住宿',8,67,'Via Monte Oliveto 12 Firenze'],['碧提宫',29,43,'Palazzo Pitti'],['波波里花园',45,25,'Boboli Gardens'],['佛罗伦萨站',61,57,'Firenze Santa Maria Novella'],['米兰中央站',82,38,'Milano Centrale'],['米兰住宿',92,61,'Via Ponte Seveso 44 Milano']],
@@ -96,7 +96,7 @@ const confirmedScheduleDetails={
  '高铁前往米兰':'4车厢 · 座位71、72、76；预计17:20抵达。',
  'TG941飞往曼谷':'波音787-9 · 座位47H、47J、47K；次日05:55抵达。'
 };
-const confirmedTimepoints=new Set(['TG924飞往慕尼黑','RJ 1183前往博尔扎诺','高铁前往佛罗伦萨','乌菲兹美术馆','学院美术馆（大卫）','旧宫','碧提宫','波波里花园','高铁前往米兰','TG941飞往曼谷']);
+const confirmedTimepoints=new Set(['TG924飞往慕尼黑','RJ 1183前往博尔扎诺','高铁前往佛罗伦萨','乌菲兹美术馆','旧宫塔楼登顶','旧宫博物馆','学院美术馆（大卫）','碧提宫','波波里花园','高铁前往米兰','TG941飞往曼谷']);
 days.forEach(day=>day.events.forEach(event=>{
  if(confirmedScheduleDetails[event[1]])event[2]=confirmedScheduleDetails[event[1]];
  if(confirmedTimepoints.has(event[1]))event[4]=true;
@@ -118,7 +118,9 @@ const tickets=[
  {kind:'体验',title:'布湖划船',status:'现场办理',tone:'onsite',date:'9/29',time:'约10:15',place:'La Palafitta · Lago di Braies',note:'现场排队；优先1小时，排队久改30分钟。'},
  {kind:'门票',title:'乌菲兹美术馆',status:'已确认',tone:'confirmed',date:'10/2',time:'08:15',place:'Uffizi Gallery',note:'3人 · Firenze Card · 免费预约；提前15–20分钟抵达。',code:'PNR H1WTKJQJ',detail:'票面共3页，每页1人；入场时需同时出示有效Firenze Card。',pdfs:[['查看门票 PDF','tickets/uffizi.pdf']]},
  {kind:'门票',title:'学院美术馆（大卫）',status:'已确认',tone:'confirmed',date:'10/2',time:'15:00',place:'Galleria dell’Accademia',note:'3人 · Firenze Card · 预约服务免费；建议提前15–20分钟抵达。',code:'预约码 24107233',detail:'3人预约；请携带Firenze Card并保存预约确认信息。'},
- {kind:'门票',title:'旧宫',status:'已确认',tone:'confirmed',date:'10/2',time:'17:45–18:00',place:'Palazzo Vecchio',note:'3人 · 免费票；建议17:25前抵达。',code:'票号 7155577 · 7155578 · 7155579',detail:'持票人WU YIXIN；3张票分为1人PDF和2人PDF。',pdfs:[['查看1人票 PDF','tickets/palazzo-vecchio-1.pdf'],['查看2人票 PDF','tickets/palazzo-vecchio-2.pdf']]},
+ {kind:'城市卡',title:'Firenze Card · 3人',status:'已确认',tone:'confirmed',date:'有效期自首次启用起计算',time:'使用前再激活',place:'佛罗伦萨',note:'XUEJIAO WANG · ZHEN SITU · YIXIN WU；每人使用自己的13位券码。',code:'3678479039417 · 5073236020352 · 7448221348670',detail:'可在Firenzecard App输入券码领取数字卡，或到官方服务点换取实体卡。点击“DOWNLOAD CARD”激活数字卡后不可替换或退款。',pdfs:[['XUEJIAO卡券 PDF','tickets/firenze-card-xuejiao-wang.pdf'],['ZHEN卡券 PDF','tickets/firenze-card-zhen-situ.pdf'],['YIXIN卡券 PDF','tickets/firenze-card-yixin-wu.pdf']]},
+ {kind:'门票',title:'旧宫塔楼登顶',status:'已确认',tone:'confirmed',date:'10/2',time:'10:45–11:30',place:'Torre di Palazzo Vecchio',note:'3人 · Firenze Card预约；建议10:30前抵达。',code:'PNR WK-y5JLgHkC9Ki · WK-BlU1FYSJiOs · WK-VSpo0L5PFvr',detail:'三张预约分别对应XUEJIAO WANG、ZHEN SITU、YIXIN WU；入场时同时出示本人Firenze Card及预约二维码。',pdfs:[['XUEJIAO预约 PDF','tickets/palazzo-vecchio-tower-xuejiao-wang.pdf'],['ZHEN预约 PDF','tickets/palazzo-vecchio-tower-zhen-situ.pdf'],['YIXIN预约 PDF','tickets/palazzo-vecchio-tower-yixin-wu.pdf']]},
+ {kind:'门票',title:'旧宫博物馆',status:'已确认',tone:'confirmed',date:'10/2',time:'12:15–12:30',place:'Museo di Palazzo Vecchio',note:'3人 · Firenze Card预约；建议12:00前抵达。',code:'PNR WK-f2mV0lbzpeS · WK-8OE7to8yM6W · WK-OVVNWqh925a',detail:'三张预约分别对应XUEJIAO WANG、ZHEN SITU、YIXIN WU；入场时同时出示本人Firenze Card及预约二维码。',pdfs:[['XUEJIAO预约 PDF','tickets/palazzo-vecchio-museum-xuejiao-wang.pdf'],['ZHEN预约 PDF','tickets/palazzo-vecchio-museum-zhen-situ.pdf'],['YIXIN预约 PDF','tickets/palazzo-vecchio-museum-yixin-wu.pdf']]},
  {kind:'门票',title:'碧提宫',status:'已确认',tone:'confirmed',date:'10/3',time:'08:15',place:'Palazzo Pitti',note:'3人 · Firenze Card · 免费预约；提前15–20分钟抵达。',code:'PNR 4M2SHP5X',detail:'票面共3页，每页1人；入场时需同时出示有效Firenze Card。',pdfs:[['查看门票 PDF','tickets/pitti-palace.pdf']]},
  {kind:'门票',title:'波波里花园',status:'已确认',tone:'confirmed',date:'10/3',time:'10:15',place:'Boboli Gardens',note:'3人 · Firenze Card · 免费预约。',code:'PNR T9C13U7B',detail:'票面共3页，每页1人；入场时需同时出示有效Firenze Card。',pdfs:[['查看门票 PDF','tickets/boboli-gardens.pdf']]},
  {kind:'住宿',title:'Be @home - Nature & City Center',status:'已确认',tone:'confirmed',date:'9/26–9/27',time:'14:00入住 · 12:00退房',place:'Lenaustraße 1, 81373 München',note:'房东Fery · 3人 · 确认码HM3NHWTRQA；提前寄存行李需联系房东。',phone:'+49 176 62326563'},
