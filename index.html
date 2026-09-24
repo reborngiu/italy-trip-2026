@@ -81,15 +81,26 @@ const days=[
  {date:'2026-09-28',label:'9/28',title:'Col Raiser徒步刀锋山 · 休斯高原',note:'Col Raiser约09:00 · Mont Sëuc约13:10',distance:'自驾约40分钟 · 徒步往返约6公里',map:[['塞尔瓦住宿',8,67,'Residence Cesa Rives Via Puez 20 Selva di Val Gardena'],['Col Raiser停车/取票',26,54,'Cabinovia Col Raiser Parkplatz Santa Cristina'],['Col Raiser山顶站',40,38,'Col Raiser mountain station'],['Seceda刀锋山',55,20,'Seceda Ridgeline Viewpoint'],['Mont Sëuc停车/谷站',68,58,'Funivie Ortisei Alpe di Siusi parking'],['休斯高原',82,28,'Mont Seuc Alpe di Siusi'],['Sonne观景方向',89,42,'Hotel Sonne Alpe di Siusi'],['塞尔瓦住宿',94,70,'Residence Cesa Rives Via Puez 20 Selva di Val Gardena']],routes:[{label:'当日自驾路线',mode:'driving',points:['Residence Cesa Rives Via Puez 20 Selva di Val Gardena','Cabinovia Col Raiser Parkplatz Santa Cristina','Funivie Ortisei Alpe di Siusi parking','Residence Cesa Rives Via Puez 20 Selva di Val Gardena']},{label:'Col Raiser–Seceda徒步往返',mode:'walking',points:['Col Raiser mountain station','Seceda Ridgeline Viewpoint','Col Raiser mountain station']},{label:'休斯高原草甸步行',mode:'walking',points:['Mont Seuc Alpe di Siusi','Hotel Sonne Alpe di Siusi','Mont Seuc Alpe di Siusi']}],notes:['建议提前网购3张EUR 67的Dolomiti SuperSummer一日通票；无MyDolomiti Card时，保存三个订单二维码，在Col Raiser谷站Pick-up Box自助取卡。','SuperSummer通票覆盖Col Raiser和Ortisei–Alpe di Siusi/Mont Sëuc往返；不覆盖Ortisei–Furnes、Furnes–Seceda及Fermeda，本日方案不使用这三段。','Col Raiser山顶站至Seceda经典观景点单程约3公里、爬升较集中；11:00必须返程，12:15最晚乘缆车下山。','休斯高原是今日重点；自带简餐，不在刀锋山安排正式午餐，目标13:30前到达Mont Sëuc山顶。','Mont Sëuc当日计划运营至18:00；17:00开始向山顶站回撤，17:30下山，出发前一天再核对天气及实时运营状态。'],events:[['07:45','早餐与装备检查','带水、简餐、防风防水外套、徒步鞋和充电宝。','Residence Cesa Rives Via Puez 20 Selva di Val Gardena'],['08:20','从住宿出发','驾车约10–15分钟，导航Cabinovia Col Raiser停车场。','Cabinovia Col Raiser Parkplatz Santa Cristina'],['08:35','Col Raiser停车','停车后带好全部装备，步行至谷站。','Cabinovia Col Raiser Parkplatz Santa Cristina'],['08:45','Pick-up Box取通票','使用三个网上订单二维码取得实体卡；若票已加载至MyDolomiti Card则直接进站。','Cabinovia Col Raiser ticket office'],['09:00','Col Raiser缆车上山','持SuperSummer通票上山；本线无需预约时段。','Cabinovia Col Raiser',true],['09:15','徒步前往Seceda','导航Seceda Ridgeline；单程约3公里，预留1小时20分至1小时40分。','Seceda Ridgeline Viewpoint'],['10:35','Seceda刀锋山','经典机位拍照、短暂休息；不前往Firenze小屋。','Seceda Ridgeline Viewpoint'],['11:00','必须原路返回','沿原路返回Col Raiser山顶站，不再增加支线。','Col Raiser mountain station',true],['12:00','抵达Col Raiser山顶站','等缆车时吃自带简餐；最晚12:15下山。','Col Raiser mountain station'],['12:15','Col Raiser缆车下山','下山后立即取车前往Ortisei。','Cabinovia Col Raiser',true],['12:30','驾车前往Ortisei','导航Funivie Ortisei–Alpe di Siusi附近停车场。','Funivie Ortisei Alpe di Siusi parking'],['12:50','Mont Sëuc停车并前往谷站','停好车后到缆车入口；同一张SuperSummer通票直接使用。','Funivie Ortisei Alpe di Siusi parking'],['13:10','Mont Sëuc缆车上山','直达休斯高原，单程约15–20分钟。','Funivie Ortisei Alpe di Siusi',true],['13:30','休斯高原重点游览','从Mont Sëuc山顶站向Hotel Sonne方向草甸散步，根据时间原路折返。','Hotel Sonne Alpe di Siusi'],['17:00','开始向Mont Sëuc站回撤','17:20前回到山顶站，不赌18:00末班。','Mont Seuc Alpe di Siusi',true],['17:30','Mont Sëuc缆车下山','下山后取车返回Selva。','Funivie Ortisei Alpe di Siusi',true],['18:10','返回塞尔瓦','晚餐后整理次日布湖与三峰徒步装备。','Residence Cesa Rives Via Puez 20 Selva di Val Gardena']]},
 ];
 const munichArrivalDay=days.find(({date})=>date==='2026-09-26');
+munichArrivalDay.note='新市政厅木偶钟12:00';
+munichArrivalDay.notes=[
+ '房东预计可在10:00～11:00之间接收行李；抵达时间受入境、取行李和公共交通影响，途中及时告知房东。',
+ '11:45前抵达玛丽恩广场；12:00新市政厅木偶钟是硬卡点。航班晚点时优先压缩教堂或午餐。',
+ '阿萨姆教堂保留为必去；如遇弥撒或临时关闭，只看外观后继续行程。',
+ '王宫博物馆与珍宝馆合计控制2小时：王宫重点看古物陈列厅等核心房间，珍宝馆预留35～45分钟。',
+ '9/26为啤酒节周六，约16:00进场；热门帐篷可能满员，看到可进入的帐篷就进。',
+ '啤酒节会场至住宿步行约1.8公里、24分钟；长途飞行抵达当天控制饮酒量。'
+];
 munichArrivalDay.events.splice(2,7,
  ['08:35','完成入境并离开机场','入境、EES、取行李和海关按落地后90～120分钟估算；正常离开窗口为08:35～09:05，全程使用公共交通。','Munich Airport Terminal 2'],
- ['09:40','抵达住宿并寄存行李','预计09:40～10:10抵达；在房东处快速放下行李后立即前往玛丽恩广场片区。','Lenaustrasse 1 81373 Munich'],
- ['10:15','前往玛丽恩广场片区','预计10:15～10:45出发；抵达得早先看圣母教堂，10:30后抵达则先看木偶钟。','Neues Rathaus Munich'],
- ['10:50','玛丽恩广场占位','最迟10:50站到广场中部；若时间不足，圣母教堂移到表演之后。','Neues Rathaus Munich'],
- ['11:00','新市政厅木偶钟表演','观看Glockenspiel完整报时，约12～15分钟。','Neues Rathaus Munich',true],
- ['11:20','圣母教堂＋阿萨姆教堂','若圣母教堂已经看过则直接去阿萨姆教堂；否则依次简短参观两处，12:00前结束。','Frauenkirche Munich'],
- ['12:00','谷物市场快速午餐','简单吃香肠、椒盐卷饼等，12:25前离开。','Viktualienmarkt Munich']
+ ['10:30','抵达住宿并寄存行李','预计10:00～11:00抵达；以实际入境和交通情况为准，途中及时告知房东。','Lenaustrasse 1 81373 Munich'],
+ ['11:10','前往玛丽恩广场片区','寄存后直接出发；若提前抵达，可在住宿附近稍作休息。','Neues Rathaus Munich'],
+ ['11:45','玛丽恩广场占位','最迟11:45站到广场中部，观察新市政厅外观并等待表演。','Neues Rathaus Munich'],
+ ['12:00','新市政厅木偶钟表演','观看Glockenspiel完整报时，约12～15分钟。','Neues Rathaus Munich',true],
+ ['12:20','圣母教堂＋阿萨姆教堂','依次简短参观两处；若时间不足，压缩圣母教堂停留时间。','Frauenkirche Munich'],
+ ['13:00','谷物市场快速午餐','简单吃香肠、椒盐卷饼等，13:25前离开。','Viktualienmarkt Munich']
 );
+const munichTimeUpdates={'慕尼黑王宫博物馆':'13:30','王宫珍宝馆':'14:50','前往啤酒节会场':'15:30','慕尼黑啤酒节':'16:10'};
+munichArrivalDay.events.forEach(event=>{const updatedTime=munichTimeUpdates[event[1]];if(updatedTime)event[0]=updatedTime});
 days.sort((firstDay,secondDay)=>firstDay.date.localeCompare(secondDay.date));
 const florenceSchedule={
  '2026-10-02':{
@@ -129,7 +140,7 @@ const tickets=[
  {kind:'火车',title:'Italo 8915 · 威尼斯 → 佛罗伦萨',status:'已确认',tone:'confirmed',date:'10/1',time:'14:17–16:20',place:'Venezia Mestre → Firenze S.M. Novella',note:'Smart标准座 · 4车厢 · 座位15、16、17 · 直达。'},
  {kind:'火车',title:'Italo 8134 · 佛罗伦萨 → 米兰',status:'已确认',tone:'confirmed',date:'10/3',time:'15:25–17:20',place:'Firenze S.M. Novella → Milano Centrale',note:'Smart标准座 · 4车厢 · 座位71、72、76 · 直达。'},
  {kind:'租车',title:'Sicily by Car',status:'已确认',tone:'confirmed',date:'9/27–9/30',time:'9/30 14:00前还车',place:'取：Via Galileo Galilei 10/H · 还：Mestre',note:'汽车驶入SABA车库；柜台在Mestre站1号站台。'},
- {kind:'停车',title:'三峰山停车票',status:'已购买',tone:'confirmed',date:'9/30–10/1',time:'13:00–00:59 · €40',place:'Rifugio Auronzo',note:'票号P26228818。注意：票面日期与当前9/29行程不一致。',url:'https://pass.auronzo.info/Frontoffice',qr:true,warning:true},
+ {kind:'停车',title:'三峰山停车票',status:'已购买',tone:'confirmed',date:'9/29–9/30',time:'13:00–00:59 · €40',place:'Rifugio Auronzo',note:'票号P26231897。预约日期已与9/29行程一致。',url:'https://pass.auronzo.info/Frontoffice',qr:true,pdfs:[['查看停车订单 PDF','tickets/tre-cime-parking.pdf']]},
  {kind:'缆车通票',title:'Dolomiti SuperSummer · 1 Day',status:'待网购',tone:'pending',date:'9/28',time:'09:00 Col Raiser · 13:10 Mont Sëuc',place:'Col Raiser＋Ortisei–Alpe di Siusi',note:'3人 · 成人约EUR 67/人；建议提前网购，无MyDolomiti Card时持二维码在Col Raiser Pick-up Box取卡。覆盖Col Raiser与Mont Sëuc往返，不覆盖Ortisei–Furnes–Seceda及Fermeda。',url:'https://www.dolomitisuperski.com/en/SuperSummer/Lift-pass'},
  {kind:'体验',title:'布湖划船',status:'现场办理',tone:'onsite',date:'9/29',time:'约10:15',place:'La Palafitta · Lago di Braies',note:'现场排队；优先1小时，排队久改30分钟。'},
  {kind:'门票',title:'乌菲兹美术馆',status:'已确认',tone:'confirmed',date:'10/2',time:'08:15',place:'Uffizi Gallery',note:'3人 · Firenze Card · 免费预约；提前15–20分钟抵达。',code:'PNR H1WTKJQJ',detail:'票面共3页，每页1人；入场时需同时出示有效Firenze Card。',pdfs:[['查看门票 PDF','tickets/uffizi.pdf']]},
@@ -238,6 +249,10 @@ document.getElementById('trainTicketGrid').innerHTML=renderTickets(tickets.filte
 document.getElementById('otherTicketGrid').innerHTML=renderTickets(tickets.filter(ticket=>ticket.kind!=='火车'));
 document.getElementById('returnFlightList').innerHTML=renderFlights(flights.slice(2));
 const parkingQrModal=document.getElementById('parkingQrModal'),closeParkingQr=document.getElementById('closeParkingQr');
+parkingQrModal.querySelector('.qr-meta').textContent='汽车 · 2026/9/29 13:00–2026/9/30 00:59';
+parkingQrModal.querySelector('.qr-image').src='assets/tre-cime-parking-qr.png';
+parkingQrModal.querySelector('.qr-code').textContent='P26231897';
+parkingQrModal.querySelector('.qr-warning').textContent='预约日期已与9月29日行程一致。取车后再到预约页绑定车牌，进入停车场前确认车辆数量显示为1。';
 const handleOpenParkingQr=()=>{parkingQrModal.classList.add('open');document.body.style.overflow='hidden';closeParkingQr.focus()};
 const handleCloseParkingQr=()=>{parkingQrModal.classList.remove('open');document.body.style.overflow=''};
 document.querySelectorAll('[data-open-parking-qr]').forEach(button=>button.onclick=handleOpenParkingQr);
